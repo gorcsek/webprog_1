@@ -1,0 +1,35 @@
+body{
+}
+
+.nav-bg {
+	background-color: #013442de;
+	min-height: 100vh;
+}
+
+.nav {
+	border: 0px;
+}
+
+.brand {
+	margin: 10px;
+}
+
+.nav ul {
+	width: 100%;
+
+}
+
+.nav-bg .nav-item {
+	border-top: 1px solid #6c6c6c;
+}
+.nav-item a, .brand a{
+	color: white;
+}
+.nav-item a:hover{
+	background-color: rgba(255,255,255,0.5);
+}
+.content-title{
+	padding: 15px;
+	border-bottom: 15px solid #013442de;
+}
+
