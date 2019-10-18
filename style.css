@@ -1,11 +1,18 @@
 body{
-	height: 5000px;
 	color: #013442de;
 }
-
 .nav-bg {
 	background-color: #013442de;
 	min-height: 100vh;
+
+}
+.main{
+	overflow: hidden;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
 }
 
 .nav {
@@ -50,3 +57,10 @@ body{
 	
 }
 
+.bl1 {
+	border-left: 1px solid #00000020;
+}
+
+.header-color {
+	background-color: #00000008;
+}
