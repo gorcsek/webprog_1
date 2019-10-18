@@ -28,6 +28,13 @@ body{
 .nav-item a:hover{
 	background-color: rgba(255,255,255,0.5);
 }
+.nav-item a:hover:before {
+    content: "\f35a";
+    font-family: FontAwesome;
+/*--adjust as necessary--*/
+    font-size: 18px;
+    padding-right: 0.5em;
+}
 .content-title{
 	padding: 15px;
 	border-bottom: 15px solid #013442de;
