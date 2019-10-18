@@ -1,5 +1,6 @@
 body{
 	height: 5000px;
+	color: #013442de;
 }
 
 .nav-bg {
@@ -30,7 +31,7 @@ body{
 	background-color: rgba(255,255,255,0.5);
 }
 .nav-item a:hover:before {
-    content: "\f35a";
+    content: "\f0a9";
     font-family: FontAwesome;
 /*--adjust as necessary--*/
     font-size: 18px;
@@ -39,5 +40,13 @@ body{
 .content-title{
 	padding: 15px;
 	border-bottom: 15px solid #013442de;
+}
+
+.btn.btn.btn-success{
+	background-color: #013442de;
+	font-size: 1.5em;
+	font-weight: bold;
+	padding: 0 15px;
+	
 }
 
