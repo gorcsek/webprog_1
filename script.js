@@ -1,7 +1,8 @@
 var rawData = "";
 var data = [];
-
-
+var page = 0;
+var pageData = [];
+var pageLength = 30;
 $(document).ready(function(){
 	$.get('./data.txt',function(data){
 		//console.log(data);
@@ -10,15 +11,57 @@ $(document).ready(function(){
 		parseLines(rawData.split('\n'));
 	})
 
+	$('#btn-right').on('click',function(e){
+		if(page < data.length){
+			page++;
+		}
+		buildDropdown()
+	})
+	$('#btn-left').on('click',function(e){
+		if(page > 0){
+			page--;
+		}
+		buildDropdown()
+	})
+	$('#btn-double-right').on('click',function(e){
+		if(page+2 <= data.length ){
+			page = page-2;
+		}
+
+		buildDropdown()
+	})
+	$('#btn-double-left').on('click',function(e){
+		if(page+2 >= 0){
+			page = page-2;
+		}
+		buildDropdown()
+	})
+
 	$('#article-list').on('change',function(e){
-		let article = data[$(e.target).val()];
+		selectItem($(e.target).val());
+	})
+})
+
+function selectItem(seq){
+		let article = data[seq];
 		//console.log(article);
 		$('#article-title').text(article.title);
 		$('#article-body').text(article.content);
 		fillLabels('#labels-original',article.label_original,'label');
 		fillLabels('#labels-recommended',article.label_recommended);
-	})
-})
+}
+
+
+function fillPageData(pageCnt){
+	let start = pageLength*pageCnt;
+	let end = ((pageLength*pageCnt)+pageLength);
+	console.log(start,end)
+	pageData = [];
+	for (var i = start; i <= end; i++) {
+		pageData.push(data[i]);
+	}
+	return pageData;
+}
 
 function fillLabels(id,label,orig){
 	console.log(id,label)
@@ -41,18 +84,22 @@ function fillLabels(id,label,orig){
 
 
 function parseLines(_rawData){
-	var z = 0;
 	_.forEach(_rawData,function(item){
-		z++;
-		if(z > 30) return false;
 		let article = parseRows(item);
 		data.push(article);
-
 	})
+	buildDropdown();
+
+}
+
+function buildDropdown(){
+	pageData = fillPageData(page);
 	var list = $("#article-list");
-	$.each(data, function(index, item) {
+	list.html('');
+	$.each(pageData, function(index, item) {
 	  list.append(new Option(item.title, index));
 	});
+	selectItem(page*pageLength);
 }
 
 
