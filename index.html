@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="hu">
 <head>
+    <meta charset="utf8"> 
     <title>Beadando</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="jquery-3.4.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="lodash.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
   <div class="container-fluid">
@@ -46,10 +50,7 @@
                 <div class="row">
                   <div class="col-8">
                     <select id="article-list" class="form-control">
-                      <option>sdfsfsdfs</option>
-                      <option>sdfsfsdfss</option>
-                      <option>sdfsfsdfss</option>
-                      <option>sdfsfsdfss</option>
+                      <option>Kérem válasszon</option>
                     </select>
                   </div>
                   <div class="col-4 inline">
@@ -81,8 +82,8 @@
             <div class="row">
               <div class="col-6 my-3">
                 <div class="card">
-                  <div class="card-header">This is the card title</div>
-                  <div class="card-body">
+                  <div class="card-header" id="article-title">This is the card title</div>
+                  <div class="card-body" id="article-body">
                     <p>
                       Mi a Lorem Ipsum?
                       A Lorem Ipsum egy egyszerû szövegrészlete, szövegutánzata a betûszedõ és nyomdaiparnak. A Lorem Ipsum az 1500-as évek óta standard szövegrészletként szolgált az iparban; mikor egy ismeretlen nyomdász összeállította a betûkészletét és egy példa-könyvet vagy szöveget nyomott papírra, ezt használta. Nem csak 5 évszázadot élt túl, de az elektronikus betûkészleteknél is változatlanul megmaradt. Az 1960-as években népszerûsítették a Lorem Ipsum részleteket magukbafoglaló Letraset lapokkal, és legutóbb softwarekkel mint például az Aldus Pagemaker.
@@ -108,19 +109,11 @@
                         <li class="list-group-item py-0">
                             <div class="row">
                                 <div class="col-sm-6 ">
-                                  <ul>
-                                    <li>sdfsdf</li>
-                                    <li>sdfsdf</li>
-                                    <li>sdfsdf</li>
-                                    <li>sdfsdf</li>
+                                  <ul id="labels-original">
                                   </ul>
                                 </div>
                                 <div class="col-sm-6 bl1">
-                                  <ul>
-                                    <li>sdfsfs</li>
-                                    <li>sdfsfs</li>
-                                    <li>sdfsfs</li>
-                                    <li>sdfsfs</li>
+                                  <ul id="labels-recommended">
                                   </ul>
                                 </div>
                             </div>
