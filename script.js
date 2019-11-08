@@ -12,27 +12,36 @@ $(document).ready(function(){
 	})
 
 	$('#btn-right').on('click',function(e){
-		if(page < data.length){
+		
+		if(page < data.length/pageLength){
 			page++;
+		}else{
+			page = 0;
 		}
 		buildDropdown()
 	})
 	$('#btn-left').on('click',function(e){
 		if(page > 0){
 			page--;
+		}else{
+			page = Math.floor(data.length/pageLength);
 		}
 		buildDropdown()
 	})
 	$('#btn-double-right').on('click',function(e){
-		if(page+2 <= data.length ){
-			page = page-2;
+		if(page+2 <=data.length/pageLength ){
+			page = page+2;
+		}else{
+			page = 0;
 		}
 
 		buildDropdown()
 	})
 	$('#btn-double-left').on('click',function(e){
-		if(page+2 >= 0){
+		if(page-2 > 0){
 			page = page-2;
+		}else{
+			page = Math.floor(data.length/pageLength);
 		}
 		buildDropdown()
 	})
@@ -70,13 +79,11 @@ function fillLabels(id,label,orig){
 		if(typeof orig !== 'undefined'){
 			if(item.type == orig){
 				var item = '<li>' + item.name + '</li>';
-				console.log(item)
 				$(id).append(item);
 			}
 		}else{
 			if(item.type == orig)
 			var item = '<li>' + item.name + '</li>';
-			console.log(item)
 			$(id).append(item);
 		}
 	})
@@ -93,6 +100,7 @@ function parseLines(_rawData){
 }
 
 function buildDropdown(){
+	console.log('page', page)
 	pageData = fillPageData(page);
 	var list = $("#article-list");
 	list.html('');
