@@ -1,0 +1,15 @@
+{
+  "name": "webprog beadando 2 server",
+  "version": "1.0.0",
+  "description": "VueJs, Node, Express, Mongo",
+  "scripts": {
+    "start": "node ./server.js",
+    "dev": "nodemon ./server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
+  }
+}
