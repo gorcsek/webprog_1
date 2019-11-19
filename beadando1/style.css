@@ -33,13 +33,14 @@ body{
 }
 .nav-item a, .brand a{
 	color: white;
+	padding-right: 0.5em;
 }
 .nav-item a:hover{
 	background-color: rgba(255,255,255,0.5);
 }
 .nav-item a:hover:before {
-    content: "\f0a9";
-    font-family: FontAwesome;
+    #content: "\f0a9";
+    #font-family: FontAwesome;
 /*--adjust as necessary--*/
     font-size: 18px;
     padding-right: 0.5em;

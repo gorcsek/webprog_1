@@ -9,7 +9,7 @@ var probability = 0.8;
 var min3 = false;
 $(document).ready(function(){
 	$.get('./data.txt',function(data){
-		console.log(data);
+		//console.log(data);
 	}).catch(function(err){
 		rawData = err.responseText;
 		parseLines(rawData.split('\n'));
@@ -134,6 +134,8 @@ function parseLines(_rawData){
 }
 
 function buildDropdown(){
+	d = new Date();
+	$('#aktev').text(d.getFullYear());
 	console.log('page', page)
 	pageData = fillPageData(page);
 	var list = $("#article-list");
