@@ -184,7 +184,7 @@ function parseLabelsSpec(row, search){
 				let _name = line[0].split('__');
 				name = _name[0];
 				value = _name[1];
-				return {name: name, value: value};
+				return {name: value, value: line[1]?line[1]:value};
 			}
 		}
 	})
