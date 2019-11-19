@@ -74,6 +74,7 @@ function selectItem(seq){
 		fillLabels('#labels-original',article.label_original,'label');
 		fillLabels('#labels-recommended',article.label_recommended);
 		fillLabels('#labels-special',article.label_special, 'special');
+		fillLabels('#labels-spec-recom',article.label_special, 'recspecial');
 }
 
 
@@ -97,14 +98,23 @@ function fillLabels(id,label,orig){
 			if(item.type == orig){
 				var item = '<li>' + item.name + '</li>';
 				$(id).append(item);
-			}
-			else{
-				console.log(item.value);
+			} else {
+				if(orig == 'special'){
+					var item = '<li>' + item.name + '</li>';
+					$(id).append(item);
+				} else {
+					if(orig == 'recspecial'){
+						if(item.value > probability || (min3 == true && count < 3)){
+							var item = '<li>' + item.name + ' (' + Number(item.value).toFixed(3) + ')</li>';
+							$(id).append(item);
+							count++;
+						}
+					}
+				}
 			}
 		}else{
 			if(item.type == orig)
 			if(item.value > probability || (min3 == true && count < 3)){
-				console.log(item.value);
 				var item = '<li>' + item.name + ' (' + item.value.toFixed(3) + ')</li>';
 				$(id).append(item);
 				count++;
@@ -179,7 +189,6 @@ function parseLabelsSpec(row, search){
 			line[0] = line[0].trim().split('label__')[1];
 			let name = line[0];
 			let value = line[1];
-			console.log(line);
 			if(name.indexOf('__') > -1){
 				let _name = line[0].split('__');
 				name = _name[0];
