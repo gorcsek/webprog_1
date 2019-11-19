@@ -5,9 +5,11 @@ var data = [];
 var page = 0;
 var pageData = [];
 var pageLength = 30;
+var probability = 0.8;
+var min3 = false;
 $(document).ready(function(){
 	$.get('./data.txt',function(data){
-		//console.log(data);
+		console.log(data);
 	}).catch(function(err){
 		rawData = err.responseText;
 		parseLines(rawData.split('\n'));
@@ -53,8 +55,14 @@ $(document).ready(function(){
 	})
 	
 	$('#formControlRange').on('change',function(e) {
-		console.log($(e.target).val());
+		probability = $(e.target).val();
 		$('#valoszinuseg').text($(e.target).val() + '%');
+		buildDropdown()
+	})
+	
+	$('#checkbox-val').on('change',function(e) {
+		min3 = this.checked;
+		buildDropdown()
 	})
 })
 
@@ -81,6 +89,7 @@ function fillPageData(pageCnt){
 
 function fillLabels(id,label,orig){
 	console.log(id,label)
+	var count = 0;
 	$(id).html("")
 	$.each(label, function(index, item){
 		if(typeof orig !== 'undefined'){
@@ -90,8 +99,11 @@ function fillLabels(id,label,orig){
 			}
 		}else{
 			if(item.type == orig)
-			var item = '<li>' + item.name + ' (' + item.value.toFixed(3) + ')</li>';
-			$(id).append(item);
+			if(item.value > probability || (min3 == true && count < 3)){
+				var item = '<li>' + item.name + ' (' + item.value.toFixed(3) + ')</li>';
+				$(id).append(item);
+				count++;
+			}
 		}
 	})
 }
