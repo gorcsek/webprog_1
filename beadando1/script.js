@@ -51,6 +51,11 @@ $(document).ready(function(){
 	$('#article-list').on('change',function(e){
 		selectItem($(e.target).val());
 	})
+	
+	$('#formControlRange').on('change',function(e) {
+		console.log($(e.target).val());
+		$('#valoszinuseg').text($(e.target).val() + '%');
+	})
 })
 
 function selectItem(seq){
@@ -85,7 +90,7 @@ function fillLabels(id,label,orig){
 			}
 		}else{
 			if(item.type == orig)
-			var item = '<li>' + item.name + '</li>';
+			var item = '<li>' + item.name + ' (' + item.value.toFixed(3) + ')</li>';
 			$(id).append(item);
 		}
 	})
