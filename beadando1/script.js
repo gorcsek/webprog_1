@@ -9,8 +9,11 @@ var probability = 0.8;
 var min3 = false;
 $(document).ready(function(){
 	$.get('./data.txt',function(data){
-		console.log(data);
+		//console.log(data);
 	}).catch(function(err){
+		if(err.statusText == "error"){
+			alert("about configba állítsd át --> privacy.file_unique_origin = false");
+		}
 		rawData = err.responseText;
 		parseLines(rawData.split('\n'));
 	})
@@ -73,7 +76,8 @@ function selectItem(seq){
 		$('#article-body').text(article.content);
 		fillLabels('#labels-original',article.label_original,'label');
 		fillLabels('#labels-recommended',article.label_recommended);
-		fillLabels('#labels-special',article.label_special,'special');
+		fillLabels('#labels-special',article.label_special, 'special');
+		fillLabels('#labels-spec-recom',article.label_special, 'recspecial');
 }
 
 
@@ -97,14 +101,22 @@ function fillLabels(id,label,orig){
 			if(item.type == orig){
 				var item = '<li>' + item.name + '</li>';
 				$(id).append(item);
-			}
-			else{
-				var item = '<li>' + item.name + '</li>';
-				$(id).append(item);
+			} else {
+				if(orig == 'special'){
+					var item = '<li>' + item.name + '</li>';
+					$(id).append(item);
+				} else {
+					if(orig == 'recspecial'){
+						if(item.value > probability || (min3 == true && count < 3)){
+							var item = '<li>' + item.name + ' (' + Number(item.value).toFixed(3) + ')</li>';
+							$(id).append(item);
+							count++;
+						}
+					}
+				}
 			}
 		}else{
 			if(item.type == orig)
-			console.log(item.type);
 			if(item.value > probability || (min3 == true && count < 3)){
 				var item = '<li>' + item.name + ' (' + item.value.toFixed(3) + ')</li>';
 				$(id).append(item);
@@ -125,6 +137,8 @@ function parseLines(_rawData){
 }
 
 function buildDropdown(){
+	d = new Date();
+	$('#aktev').text(d.getFullYear());
 	console.log('page', page)
 	pageData = fillPageData(page);
 	var list = $("#article-list");
