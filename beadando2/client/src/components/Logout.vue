@@ -1,29 +1,29 @@
 <template>
   <div class="logout">
     <div class="">
-      <h3>{{$t('logut')}}</h3>
+      <h3>logout</h3>
     </div>
   </div>
 </template>
 
 <script>
+import { EventBus } from '../event-bus.js';
+
 export default {
   name: 'Logout',
   methods: {
     logout: function(){
-      var _this = this;
-      console.log("+XXX")
-      this.$http.post("/users/logout",this.user).then((response) => {
+
+      localStorage.removeItem('token')
         localStorage.clear();
-        _this.$store.commit('setUser', {});
-        _this.$store.commit('setLoggedIn', false);
-        _this.$router.push({ name: 'Products' });
-        this.$toast.open('Sikeresen kijelentkezett');
-      })
+               EventBus.$emit('login', false)
+      this.$router.push('/')
     }
   },
   mounted() {
+   this.checkLoggedIn()
     this.logout();
+
   },
 }
 </script>

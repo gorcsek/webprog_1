@@ -1,14 +1,30 @@
 import axios from 'axios';
 const API_URL = 'http://localhost:4000';
+import { EventBus } from './event-bus.js';
 
-const http = axios.create({
+
+
+var token = localStorage.getItem('token');
+var http = axios.create({
   baseURL: API_URL,
   timeout: 3000,
   headers:{
     "Content-Type": 'application/json',
-    "Authorization": localStorage.getItem('token'),
+    "Authorization": token,
   },
 });
+EventBus.$on('login', function(val){
+  token = localStorage.getItem('token');
+  http = axios.create({
+  baseURL: API_URL,
+  timeout: 3000,
+  headers:{
+    "Content-Type": 'application/json',
+    "Authorization": token,
+  },
+});
+}.bind(this))
+
 
 
 export class APIService{

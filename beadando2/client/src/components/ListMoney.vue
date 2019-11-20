@@ -32,6 +32,8 @@
 <script>
 import {APIService} from '../APIService';
 import CreateMoney from '@/components/CreateMoney';
+import { EventBus } from '../event-bus.js';
+
 const apiService = new APIService();
 export default {
   name: 'ListMoney',
@@ -73,8 +75,10 @@ export default {
   methods: {
     getMoneyList(){
       apiService.getMoneyList().then((data) => {
-        this.money = data;
-        this.numberOfProducts = data.count;
+       if(typeof data.success === "undefined"){
+          this.money = data;
+          this.numberOfProducts = data.count;
+        }
       });
     },
     deleteTodo(item){
@@ -88,7 +92,17 @@ export default {
     },
   },
   mounted() {
+    var _this = this;
     this.getMoneyList();
+    EventBus.$on('login', function(val){
+     console.log('login',val)
+     /*if(!val){
+      this.money = [];
+     }*/
+     // setInterval(function(){
+        _this.getMoneyList();
+      //},1000);
+    }.bind(this))
   },
 }
 </script>

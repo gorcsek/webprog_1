@@ -21,6 +21,10 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+Vue.prototype.checkLoggedIn = function(){
+  return localStorage.getItem('token')==null?false:true
+}
+
 
 new Vue({
   render: h => h(App),

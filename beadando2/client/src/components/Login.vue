@@ -29,7 +29,7 @@
 <script>
 import {APIService} from '../APIService';
 const apiService = new APIService();
-
+import { EventBus } from '../event-bus.js';
 export default {
   name: "Login",
   components: {},
@@ -52,6 +52,8 @@ export default {
       var _this = this;
       apiService.login(this.user).then((result)=>{
         localStorage.setItem('token',result.data.token)
+        APIService.token = result.data.token;
+        EventBus.$emit('login', true)
         this.$router.push('/')
       },(error)=>{
           this.showError = true;
