@@ -11,6 +11,9 @@ $(document).ready(function(){
 	$.get('./data.txt',function(data){
 		//console.log(data);
 	}).catch(function(err){
+		if(err.statusText == "error"){
+			alert("about configba állítsd át --> privacy.file_unique_origin = false");
+		}
 		rawData = err.responseText;
 		parseLines(rawData.split('\n'));
 	})
